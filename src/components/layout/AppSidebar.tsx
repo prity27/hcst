@@ -50,7 +50,9 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, AlertTriangle } from "lucide-react";
+import { getAuthUser } from "@/lib/auth";
+import { isUrlAllowed } from "@/lib/roles";
 
 type Item = { title: string; url: string; icon: React.ComponentType<{ className?: string }> };
 type Group = { label: string; items: Item[]; collapsible?: boolean };

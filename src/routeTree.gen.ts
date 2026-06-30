@@ -29,6 +29,7 @@ import { Route as AppMachinesRouteImport } from './routes/_app.machines'
 import { Route as AppMachineOperatorsRouteImport } from './routes/_app.machine-operators'
 import { Route as AppHarvestAssignmentsRouteImport } from './routes/_app.harvest-assignments'
 import { Route as AppFarmsRouteImport } from './routes/_app.farms'
+import { Route as AppErrorCorrectionsRouteImport } from './routes/_app.error-corrections'
 import { Route as AppEmploymentCompaniesRouteImport } from './routes/_app.employment-companies'
 import { Route as AppDispatchNotesRouteImport } from './routes/_app.dispatch-notes'
 import { Route as AppDestinationCentersRouteImport } from './routes/_app.destination-centers'
@@ -142,6 +143,11 @@ const AppFarmsRoute = AppFarmsRouteImport.update({
   path: '/farms',
   getParentRoute: () => AppRoute,
 } as any)
+const AppErrorCorrectionsRoute = AppErrorCorrectionsRouteImport.update({
+  id: '/error-corrections',
+  path: '/error-corrections',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppEmploymentCompaniesRoute = AppEmploymentCompaniesRouteImport.update({
   id: '/employment-companies',
   path: '/employment-companies',
@@ -219,6 +225,7 @@ export interface FileRoutesByFullPath {
   '/destination-centers': typeof AppDestinationCentersRoute
   '/dispatch-notes': typeof AppDispatchNotesRoute
   '/employment-companies': typeof AppEmploymentCompaniesRoute
+  '/error-corrections': typeof AppErrorCorrectionsRoute
   '/farms': typeof AppFarmsRoute
   '/harvest-assignments': typeof AppHarvestAssignmentsRoute
   '/machine-operators': typeof AppMachineOperatorsRoute
@@ -253,6 +260,7 @@ export interface FileRoutesByTo {
   '/destination-centers': typeof AppDestinationCentersRoute
   '/dispatch-notes': typeof AppDispatchNotesRoute
   '/employment-companies': typeof AppEmploymentCompaniesRoute
+  '/error-corrections': typeof AppErrorCorrectionsRoute
   '/farms': typeof AppFarmsRoute
   '/harvest-assignments': typeof AppHarvestAssignmentsRoute
   '/machine-operators': typeof AppMachineOperatorsRoute
@@ -289,6 +297,7 @@ export interface FileRoutesById {
   '/_app/destination-centers': typeof AppDestinationCentersRoute
   '/_app/dispatch-notes': typeof AppDispatchNotesRoute
   '/_app/employment-companies': typeof AppEmploymentCompaniesRoute
+  '/_app/error-corrections': typeof AppErrorCorrectionsRoute
   '/_app/farms': typeof AppFarmsRoute
   '/_app/harvest-assignments': typeof AppHarvestAssignmentsRoute
   '/_app/machine-operators': typeof AppMachineOperatorsRoute
@@ -325,6 +334,7 @@ export interface FileRouteTypes {
     | '/destination-centers'
     | '/dispatch-notes'
     | '/employment-companies'
+    | '/error-corrections'
     | '/farms'
     | '/harvest-assignments'
     | '/machine-operators'
@@ -359,6 +369,7 @@ export interface FileRouteTypes {
     | '/destination-centers'
     | '/dispatch-notes'
     | '/employment-companies'
+    | '/error-corrections'
     | '/farms'
     | '/harvest-assignments'
     | '/machine-operators'
@@ -394,6 +405,7 @@ export interface FileRouteTypes {
     | '/_app/destination-centers'
     | '/_app/dispatch-notes'
     | '/_app/employment-companies'
+    | '/_app/error-corrections'
     | '/_app/farms'
     | '/_app/harvest-assignments'
     | '/_app/machine-operators'
@@ -566,6 +578,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppFarmsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/error-corrections': {
+      id: '/_app/error-corrections'
+      path: '/error-corrections'
+      fullPath: '/error-corrections'
+      preLoaderRoute: typeof AppErrorCorrectionsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/employment-companies': {
       id: '/_app/employment-companies'
       path: '/employment-companies'
@@ -669,6 +688,7 @@ interface AppRouteChildren {
   AppDestinationCentersRoute: typeof AppDestinationCentersRoute
   AppDispatchNotesRoute: typeof AppDispatchNotesRoute
   AppEmploymentCompaniesRoute: typeof AppEmploymentCompaniesRoute
+  AppErrorCorrectionsRoute: typeof AppErrorCorrectionsRoute
   AppFarmsRoute: typeof AppFarmsRoute
   AppHarvestAssignmentsRoute: typeof AppHarvestAssignmentsRoute
   AppMachineOperatorsRoute: typeof AppMachineOperatorsRoute
@@ -702,6 +722,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppDestinationCentersRoute: AppDestinationCentersRoute,
   AppDispatchNotesRoute: AppDispatchNotesRoute,
   AppEmploymentCompaniesRoute: AppEmploymentCompaniesRoute,
+  AppErrorCorrectionsRoute: AppErrorCorrectionsRoute,
   AppFarmsRoute: AppFarmsRoute,
   AppHarvestAssignmentsRoute: AppHarvestAssignmentsRoute,
   AppMachineOperatorsRoute: AppMachineOperatorsRoute,
