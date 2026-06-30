@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/popover";
 import { sidebarGroups } from "./AppSidebar";
 import { getAuthUser, signOut } from "@/lib/auth";
+import { ROLE_LABELS } from "@/lib/roles";
 
 function useBreadcrumbs() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
