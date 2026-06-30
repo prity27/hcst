@@ -137,6 +137,12 @@ export function AppSidebar() {
   const collapsed = state === "collapsed";
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isActive = (url: string) => pathname === url || pathname.startsWith(url + "/");
+  const user = getAuthUser();
+  const role = user?.role ?? "admin";
+  const visibleGroups = groups
+    .map((g) => ({ ...g, items: g.items.filter((i) => isUrlAllowed(role, i.url)) }))
+    .filter((g) => g.items.length > 0);
+
 
   return (
     <Sidebar collapsible="icon" className="border-r border-sidebar-border">
