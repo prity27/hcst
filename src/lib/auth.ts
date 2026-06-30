@@ -1,6 +1,28 @@
-const KEY = "hcts.auth";
+import type { Role } from "./roles";
 
-export type AuthUser = { email: string; name: string };
+const KEY = "hcts.auth";
+const USERS_KEY = "hcts.users";
+const RESETS_KEY = "hcts.resets";
+
+export type AuthUser = { email: string; name: string; role: Role };
+type StoredUser = AuthUser & { password: string };
+
+function readUsers(): StoredUser[] {
+  if (typeof window === "undefined") return [];
+  try {
+    return JSON.parse(window.localStorage.getItem(USERS_KEY) || "[]") as StoredUser[];
+  } catch {
+    return [];
+  }
+}
+
+function writeUsers(users: StoredUser[]) {
+  window.localStorage.setItem(USERS_KEY, JSON.stringify(users));
+}
+
+function nameFromEmail(email: string) {
+  return email.split("@")[0].replace(/[._-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
 
 export function getAuthUser(): AuthUser | null {
   if (typeof window === "undefined") return null;
@@ -12,13 +34,39 @@ export function getAuthUser(): AuthUser | null {
   }
 }
 
-export function signIn(email: string) {
+export function signIn(email: string, _password?: string): AuthUser {
+  const users = readUsers();
+  const existing = users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+  const role: Role = existing?.role ?? "admin";
   const user: AuthUser = {
     email,
-    name: email.split("@")[0].replace(/[._-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+    name: existing?.name ?? nameFromEmail(email),
+    role,
   };
   window.localStorage.setItem(KEY, JSON.stringify(user));
   return user;
+}
+
+export function signUp(input: { email: string; name: string; password: string; role: Role }): AuthUser {
+  const users = readUsers();
+  const filtered = users.filter((u) => u.email.toLowerCase() !== input.email.toLowerCase());
+  filtered.push({ ...input });
+  writeUsers(filtered);
+  const user: AuthUser = { email: input.email, name: input.name, role: input.role };
+  window.localStorage.setItem(KEY, JSON.stringify(user));
+  return user;
+}
+
+export function requestPasswordReset(email: string): { token: string } {
+  const token = Math.random().toString(36).slice(2, 10).toUpperCase();
+  try {
+    const list = JSON.parse(window.localStorage.getItem(RESETS_KEY) || "[]");
+    list.push({ email, token, at: new Date().toISOString() });
+    window.localStorage.setItem(RESETS_KEY, JSON.stringify(list));
+  } catch {
+    /* noop */
+  }
+  return { token };
 }
 
 export function signOut() {
