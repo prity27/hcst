@@ -109,6 +109,7 @@ const groups: Group[] = [
       { title: "Collection Monitoring", url: "/collection-monitoring", icon: Eye },
       { title: "Dispatch Notes", url: "/dispatch-notes", icon: FileText },
       { title: "Transfer Orders", url: "/transfer-orders", icon: ArrowRightLeft },
+      { title: "Error Corrections", url: "/error-corrections", icon: AlertTriangle },
     ],
   },
   {
