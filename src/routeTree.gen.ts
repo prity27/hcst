@@ -9,38 +9,437 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppWorkersRouteImport } from './routes/_app.workers'
+import { Route as AppVarietiesRouteImport } from './routes/_app.varieties'
+import { Route as AppValvesRouteImport } from './routes/_app.valves'
+import { Route as AppUsersRouteImport } from './routes/_app.users'
+import { Route as AppTransportProvidersRouteImport } from './routes/_app.transport-providers'
+import { Route as AppTransferOrdersRouteImport } from './routes/_app.transfer-orders'
+import { Route as AppSettingsRouteImport } from './routes/_app.settings'
+import { Route as AppSatelliteRolesRouteImport } from './routes/_app.satellite-roles'
+import { Route as AppRolesRouteImport } from './routes/_app.roles'
+import { Route as AppQrSeriesRouteImport } from './routes/_app.qr-series'
+import { Route as AppQrInventoryRouteImport } from './routes/_app.qr-inventory'
+import { Route as AppPlotsRouteImport } from './routes/_app.plots'
+import { Route as AppParksRouteImport } from './routes/_app.parks'
+import { Route as AppMachinesRouteImport } from './routes/_app.machines'
+import { Route as AppMachineOperatorsRouteImport } from './routes/_app.machine-operators'
+import { Route as AppHarvestAssignmentsRouteImport } from './routes/_app.harvest-assignments'
+import { Route as AppFarmsRouteImport } from './routes/_app.farms'
+import { Route as AppEmploymentCompaniesRouteImport } from './routes/_app.employment-companies'
+import { Route as AppDispatchNotesRouteImport } from './routes/_app.dispatch-notes'
+import { Route as AppDestinationCentersRouteImport } from './routes/_app.destination-centers'
+import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppCollectionMonitoringRouteImport } from './routes/_app.collection-monitoring'
+import { Route as AppCampaignsRouteImport } from './routes/_app.campaigns'
+import { Route as AppBuyersRouteImport } from './routes/_app.buyers'
+import { Route as AppAuditLogsRouteImport } from './routes/_app.audit-logs'
+import { Route as AppReportsTraceabilityRouteImport } from './routes/_app.reports.traceability'
+import { Route as AppReportsProductivityRouteImport } from './routes/_app.reports.productivity'
+import { Route as AppReportsHarvestRouteImport } from './routes/_app.reports.harvest'
+import { Route as AppReportsForecastRouteImport } from './routes/_app.reports.forecast'
+import { Route as AppReportsDispatchRouteImport } from './routes/_app.reports.dispatch'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppWorkersRoute = AppWorkersRouteImport.update({
+  id: '/workers',
+  path: '/workers',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVarietiesRoute = AppVarietiesRouteImport.update({
+  id: '/varieties',
+  path: '/varieties',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppValvesRoute = AppValvesRouteImport.update({
+  id: '/valves',
+  path: '/valves',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppUsersRoute = AppUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTransportProvidersRoute = AppTransportProvidersRouteImport.update({
+  id: '/transport-providers',
+  path: '/transport-providers',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTransferOrdersRoute = AppTransferOrdersRouteImport.update({
+  id: '/transfer-orders',
+  path: '/transfer-orders',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSatelliteRolesRoute = AppSatelliteRolesRouteImport.update({
+  id: '/satellite-roles',
+  path: '/satellite-roles',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRolesRoute = AppRolesRouteImport.update({
+  id: '/roles',
+  path: '/roles',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppQrSeriesRoute = AppQrSeriesRouteImport.update({
+  id: '/qr-series',
+  path: '/qr-series',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppQrInventoryRoute = AppQrInventoryRouteImport.update({
+  id: '/qr-inventory',
+  path: '/qr-inventory',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPlotsRoute = AppPlotsRouteImport.update({
+  id: '/plots',
+  path: '/plots',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppParksRoute = AppParksRouteImport.update({
+  id: '/parks',
+  path: '/parks',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMachinesRoute = AppMachinesRouteImport.update({
+  id: '/machines',
+  path: '/machines',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMachineOperatorsRoute = AppMachineOperatorsRouteImport.update({
+  id: '/machine-operators',
+  path: '/machine-operators',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHarvestAssignmentsRoute = AppHarvestAssignmentsRouteImport.update({
+  id: '/harvest-assignments',
+  path: '/harvest-assignments',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppFarmsRoute = AppFarmsRouteImport.update({
+  id: '/farms',
+  path: '/farms',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEmploymentCompaniesRoute = AppEmploymentCompaniesRouteImport.update({
+  id: '/employment-companies',
+  path: '/employment-companies',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDispatchNotesRoute = AppDispatchNotesRouteImport.update({
+  id: '/dispatch-notes',
+  path: '/dispatch-notes',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDestinationCentersRoute = AppDestinationCentersRouteImport.update({
+  id: '/destination-centers',
+  path: '/destination-centers',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCollectionMonitoringRoute = AppCollectionMonitoringRouteImport.update({
+  id: '/collection-monitoring',
+  path: '/collection-monitoring',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCampaignsRoute = AppCampaignsRouteImport.update({
+  id: '/campaigns',
+  path: '/campaigns',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBuyersRoute = AppBuyersRouteImport.update({
+  id: '/buyers',
+  path: '/buyers',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAuditLogsRoute = AppAuditLogsRouteImport.update({
+  id: '/audit-logs',
+  path: '/audit-logs',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReportsTraceabilityRoute = AppReportsTraceabilityRouteImport.update({
+  id: '/reports/traceability',
+  path: '/reports/traceability',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReportsProductivityRoute = AppReportsProductivityRouteImport.update({
+  id: '/reports/productivity',
+  path: '/reports/productivity',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReportsHarvestRoute = AppReportsHarvestRouteImport.update({
+  id: '/reports/harvest',
+  path: '/reports/harvest',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReportsForecastRoute = AppReportsForecastRouteImport.update({
+  id: '/reports/forecast',
+  path: '/reports/forecast',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReportsDispatchRoute = AppReportsDispatchRouteImport.update({
+  id: '/reports/dispatch',
+  path: '/reports/dispatch',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/audit-logs': typeof AppAuditLogsRoute
+  '/buyers': typeof AppBuyersRoute
+  '/campaigns': typeof AppCampaignsRoute
+  '/collection-monitoring': typeof AppCollectionMonitoringRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/destination-centers': typeof AppDestinationCentersRoute
+  '/dispatch-notes': typeof AppDispatchNotesRoute
+  '/employment-companies': typeof AppEmploymentCompaniesRoute
+  '/farms': typeof AppFarmsRoute
+  '/harvest-assignments': typeof AppHarvestAssignmentsRoute
+  '/machine-operators': typeof AppMachineOperatorsRoute
+  '/machines': typeof AppMachinesRoute
+  '/parks': typeof AppParksRoute
+  '/plots': typeof AppPlotsRoute
+  '/qr-inventory': typeof AppQrInventoryRoute
+  '/qr-series': typeof AppQrSeriesRoute
+  '/roles': typeof AppRolesRoute
+  '/satellite-roles': typeof AppSatelliteRolesRoute
+  '/settings': typeof AppSettingsRoute
+  '/transfer-orders': typeof AppTransferOrdersRoute
+  '/transport-providers': typeof AppTransportProvidersRoute
+  '/users': typeof AppUsersRoute
+  '/valves': typeof AppValvesRoute
+  '/varieties': typeof AppVarietiesRoute
+  '/workers': typeof AppWorkersRoute
+  '/reports/dispatch': typeof AppReportsDispatchRoute
+  '/reports/forecast': typeof AppReportsForecastRoute
+  '/reports/harvest': typeof AppReportsHarvestRoute
+  '/reports/productivity': typeof AppReportsProductivityRoute
+  '/reports/traceability': typeof AppReportsTraceabilityRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/audit-logs': typeof AppAuditLogsRoute
+  '/buyers': typeof AppBuyersRoute
+  '/campaigns': typeof AppCampaignsRoute
+  '/collection-monitoring': typeof AppCollectionMonitoringRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/destination-centers': typeof AppDestinationCentersRoute
+  '/dispatch-notes': typeof AppDispatchNotesRoute
+  '/employment-companies': typeof AppEmploymentCompaniesRoute
+  '/farms': typeof AppFarmsRoute
+  '/harvest-assignments': typeof AppHarvestAssignmentsRoute
+  '/machine-operators': typeof AppMachineOperatorsRoute
+  '/machines': typeof AppMachinesRoute
+  '/parks': typeof AppParksRoute
+  '/plots': typeof AppPlotsRoute
+  '/qr-inventory': typeof AppQrInventoryRoute
+  '/qr-series': typeof AppQrSeriesRoute
+  '/roles': typeof AppRolesRoute
+  '/satellite-roles': typeof AppSatelliteRolesRoute
+  '/settings': typeof AppSettingsRoute
+  '/transfer-orders': typeof AppTransferOrdersRoute
+  '/transport-providers': typeof AppTransportProvidersRoute
+  '/users': typeof AppUsersRoute
+  '/valves': typeof AppValvesRoute
+  '/varieties': typeof AppVarietiesRoute
+  '/workers': typeof AppWorkersRoute
+  '/reports/dispatch': typeof AppReportsDispatchRoute
+  '/reports/forecast': typeof AppReportsForecastRoute
+  '/reports/harvest': typeof AppReportsHarvestRoute
+  '/reports/productivity': typeof AppReportsProductivityRoute
+  '/reports/traceability': typeof AppReportsTraceabilityRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/login': typeof LoginRoute
+  '/_app/audit-logs': typeof AppAuditLogsRoute
+  '/_app/buyers': typeof AppBuyersRoute
+  '/_app/campaigns': typeof AppCampaignsRoute
+  '/_app/collection-monitoring': typeof AppCollectionMonitoringRoute
+  '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/destination-centers': typeof AppDestinationCentersRoute
+  '/_app/dispatch-notes': typeof AppDispatchNotesRoute
+  '/_app/employment-companies': typeof AppEmploymentCompaniesRoute
+  '/_app/farms': typeof AppFarmsRoute
+  '/_app/harvest-assignments': typeof AppHarvestAssignmentsRoute
+  '/_app/machine-operators': typeof AppMachineOperatorsRoute
+  '/_app/machines': typeof AppMachinesRoute
+  '/_app/parks': typeof AppParksRoute
+  '/_app/plots': typeof AppPlotsRoute
+  '/_app/qr-inventory': typeof AppQrInventoryRoute
+  '/_app/qr-series': typeof AppQrSeriesRoute
+  '/_app/roles': typeof AppRolesRoute
+  '/_app/satellite-roles': typeof AppSatelliteRolesRoute
+  '/_app/settings': typeof AppSettingsRoute
+  '/_app/transfer-orders': typeof AppTransferOrdersRoute
+  '/_app/transport-providers': typeof AppTransportProvidersRoute
+  '/_app/users': typeof AppUsersRoute
+  '/_app/valves': typeof AppValvesRoute
+  '/_app/varieties': typeof AppVarietiesRoute
+  '/_app/workers': typeof AppWorkersRoute
+  '/_app/reports/dispatch': typeof AppReportsDispatchRoute
+  '/_app/reports/forecast': typeof AppReportsForecastRoute
+  '/_app/reports/harvest': typeof AppReportsHarvestRoute
+  '/_app/reports/productivity': typeof AppReportsProductivityRoute
+  '/_app/reports/traceability': typeof AppReportsTraceabilityRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/audit-logs'
+    | '/buyers'
+    | '/campaigns'
+    | '/collection-monitoring'
+    | '/dashboard'
+    | '/destination-centers'
+    | '/dispatch-notes'
+    | '/employment-companies'
+    | '/farms'
+    | '/harvest-assignments'
+    | '/machine-operators'
+    | '/machines'
+    | '/parks'
+    | '/plots'
+    | '/qr-inventory'
+    | '/qr-series'
+    | '/roles'
+    | '/satellite-roles'
+    | '/settings'
+    | '/transfer-orders'
+    | '/transport-providers'
+    | '/users'
+    | '/valves'
+    | '/varieties'
+    | '/workers'
+    | '/reports/dispatch'
+    | '/reports/forecast'
+    | '/reports/harvest'
+    | '/reports/productivity'
+    | '/reports/traceability'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/login'
+    | '/audit-logs'
+    | '/buyers'
+    | '/campaigns'
+    | '/collection-monitoring'
+    | '/dashboard'
+    | '/destination-centers'
+    | '/dispatch-notes'
+    | '/employment-companies'
+    | '/farms'
+    | '/harvest-assignments'
+    | '/machine-operators'
+    | '/machines'
+    | '/parks'
+    | '/plots'
+    | '/qr-inventory'
+    | '/qr-series'
+    | '/roles'
+    | '/satellite-roles'
+    | '/settings'
+    | '/transfer-orders'
+    | '/transport-providers'
+    | '/users'
+    | '/valves'
+    | '/varieties'
+    | '/workers'
+    | '/reports/dispatch'
+    | '/reports/forecast'
+    | '/reports/harvest'
+    | '/reports/productivity'
+    | '/reports/traceability'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/login'
+    | '/_app/audit-logs'
+    | '/_app/buyers'
+    | '/_app/campaigns'
+    | '/_app/collection-monitoring'
+    | '/_app/dashboard'
+    | '/_app/destination-centers'
+    | '/_app/dispatch-notes'
+    | '/_app/employment-companies'
+    | '/_app/farms'
+    | '/_app/harvest-assignments'
+    | '/_app/machine-operators'
+    | '/_app/machines'
+    | '/_app/parks'
+    | '/_app/plots'
+    | '/_app/qr-inventory'
+    | '/_app/qr-series'
+    | '/_app/roles'
+    | '/_app/satellite-roles'
+    | '/_app/settings'
+    | '/_app/transfer-orders'
+    | '/_app/transport-providers'
+    | '/_app/users'
+    | '/_app/valves'
+    | '/_app/varieties'
+    | '/_app/workers'
+    | '/_app/reports/dispatch'
+    | '/_app/reports/forecast'
+    | '/_app/reports/harvest'
+    | '/_app/reports/productivity'
+    | '/_app/reports/traceability'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  LoginRoute: typeof LoginRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +447,292 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/workers': {
+      id: '/_app/workers'
+      path: '/workers'
+      fullPath: '/workers'
+      preLoaderRoute: typeof AppWorkersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/varieties': {
+      id: '/_app/varieties'
+      path: '/varieties'
+      fullPath: '/varieties'
+      preLoaderRoute: typeof AppVarietiesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/valves': {
+      id: '/_app/valves'
+      path: '/valves'
+      fullPath: '/valves'
+      preLoaderRoute: typeof AppValvesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/users': {
+      id: '/_app/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AppUsersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/transport-providers': {
+      id: '/_app/transport-providers'
+      path: '/transport-providers'
+      fullPath: '/transport-providers'
+      preLoaderRoute: typeof AppTransportProvidersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/transfer-orders': {
+      id: '/_app/transfer-orders'
+      path: '/transfer-orders'
+      fullPath: '/transfer-orders'
+      preLoaderRoute: typeof AppTransferOrdersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/satellite-roles': {
+      id: '/_app/satellite-roles'
+      path: '/satellite-roles'
+      fullPath: '/satellite-roles'
+      preLoaderRoute: typeof AppSatelliteRolesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/roles': {
+      id: '/_app/roles'
+      path: '/roles'
+      fullPath: '/roles'
+      preLoaderRoute: typeof AppRolesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/qr-series': {
+      id: '/_app/qr-series'
+      path: '/qr-series'
+      fullPath: '/qr-series'
+      preLoaderRoute: typeof AppQrSeriesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/qr-inventory': {
+      id: '/_app/qr-inventory'
+      path: '/qr-inventory'
+      fullPath: '/qr-inventory'
+      preLoaderRoute: typeof AppQrInventoryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/plots': {
+      id: '/_app/plots'
+      path: '/plots'
+      fullPath: '/plots'
+      preLoaderRoute: typeof AppPlotsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/parks': {
+      id: '/_app/parks'
+      path: '/parks'
+      fullPath: '/parks'
+      preLoaderRoute: typeof AppParksRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/machines': {
+      id: '/_app/machines'
+      path: '/machines'
+      fullPath: '/machines'
+      preLoaderRoute: typeof AppMachinesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/machine-operators': {
+      id: '/_app/machine-operators'
+      path: '/machine-operators'
+      fullPath: '/machine-operators'
+      preLoaderRoute: typeof AppMachineOperatorsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/harvest-assignments': {
+      id: '/_app/harvest-assignments'
+      path: '/harvest-assignments'
+      fullPath: '/harvest-assignments'
+      preLoaderRoute: typeof AppHarvestAssignmentsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/farms': {
+      id: '/_app/farms'
+      path: '/farms'
+      fullPath: '/farms'
+      preLoaderRoute: typeof AppFarmsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/employment-companies': {
+      id: '/_app/employment-companies'
+      path: '/employment-companies'
+      fullPath: '/employment-companies'
+      preLoaderRoute: typeof AppEmploymentCompaniesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/dispatch-notes': {
+      id: '/_app/dispatch-notes'
+      path: '/dispatch-notes'
+      fullPath: '/dispatch-notes'
+      preLoaderRoute: typeof AppDispatchNotesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/destination-centers': {
+      id: '/_app/destination-centers'
+      path: '/destination-centers'
+      fullPath: '/destination-centers'
+      preLoaderRoute: typeof AppDestinationCentersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/collection-monitoring': {
+      id: '/_app/collection-monitoring'
+      path: '/collection-monitoring'
+      fullPath: '/collection-monitoring'
+      preLoaderRoute: typeof AppCollectionMonitoringRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/campaigns': {
+      id: '/_app/campaigns'
+      path: '/campaigns'
+      fullPath: '/campaigns'
+      preLoaderRoute: typeof AppCampaignsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/buyers': {
+      id: '/_app/buyers'
+      path: '/buyers'
+      fullPath: '/buyers'
+      preLoaderRoute: typeof AppBuyersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/audit-logs': {
+      id: '/_app/audit-logs'
+      path: '/audit-logs'
+      fullPath: '/audit-logs'
+      preLoaderRoute: typeof AppAuditLogsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/reports/traceability': {
+      id: '/_app/reports/traceability'
+      path: '/reports/traceability'
+      fullPath: '/reports/traceability'
+      preLoaderRoute: typeof AppReportsTraceabilityRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/reports/productivity': {
+      id: '/_app/reports/productivity'
+      path: '/reports/productivity'
+      fullPath: '/reports/productivity'
+      preLoaderRoute: typeof AppReportsProductivityRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/reports/harvest': {
+      id: '/_app/reports/harvest'
+      path: '/reports/harvest'
+      fullPath: '/reports/harvest'
+      preLoaderRoute: typeof AppReportsHarvestRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/reports/forecast': {
+      id: '/_app/reports/forecast'
+      path: '/reports/forecast'
+      fullPath: '/reports/forecast'
+      preLoaderRoute: typeof AppReportsForecastRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/reports/dispatch': {
+      id: '/_app/reports/dispatch'
+      path: '/reports/dispatch'
+      fullPath: '/reports/dispatch'
+      preLoaderRoute: typeof AppReportsDispatchRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAuditLogsRoute: typeof AppAuditLogsRoute
+  AppBuyersRoute: typeof AppBuyersRoute
+  AppCampaignsRoute: typeof AppCampaignsRoute
+  AppCollectionMonitoringRoute: typeof AppCollectionMonitoringRoute
+  AppDashboardRoute: typeof AppDashboardRoute
+  AppDestinationCentersRoute: typeof AppDestinationCentersRoute
+  AppDispatchNotesRoute: typeof AppDispatchNotesRoute
+  AppEmploymentCompaniesRoute: typeof AppEmploymentCompaniesRoute
+  AppFarmsRoute: typeof AppFarmsRoute
+  AppHarvestAssignmentsRoute: typeof AppHarvestAssignmentsRoute
+  AppMachineOperatorsRoute: typeof AppMachineOperatorsRoute
+  AppMachinesRoute: typeof AppMachinesRoute
+  AppParksRoute: typeof AppParksRoute
+  AppPlotsRoute: typeof AppPlotsRoute
+  AppQrInventoryRoute: typeof AppQrInventoryRoute
+  AppQrSeriesRoute: typeof AppQrSeriesRoute
+  AppRolesRoute: typeof AppRolesRoute
+  AppSatelliteRolesRoute: typeof AppSatelliteRolesRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppTransferOrdersRoute: typeof AppTransferOrdersRoute
+  AppTransportProvidersRoute: typeof AppTransportProvidersRoute
+  AppUsersRoute: typeof AppUsersRoute
+  AppValvesRoute: typeof AppValvesRoute
+  AppVarietiesRoute: typeof AppVarietiesRoute
+  AppWorkersRoute: typeof AppWorkersRoute
+  AppReportsDispatchRoute: typeof AppReportsDispatchRoute
+  AppReportsForecastRoute: typeof AppReportsForecastRoute
+  AppReportsHarvestRoute: typeof AppReportsHarvestRoute
+  AppReportsProductivityRoute: typeof AppReportsProductivityRoute
+  AppReportsTraceabilityRoute: typeof AppReportsTraceabilityRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAuditLogsRoute: AppAuditLogsRoute,
+  AppBuyersRoute: AppBuyersRoute,
+  AppCampaignsRoute: AppCampaignsRoute,
+  AppCollectionMonitoringRoute: AppCollectionMonitoringRoute,
+  AppDashboardRoute: AppDashboardRoute,
+  AppDestinationCentersRoute: AppDestinationCentersRoute,
+  AppDispatchNotesRoute: AppDispatchNotesRoute,
+  AppEmploymentCompaniesRoute: AppEmploymentCompaniesRoute,
+  AppFarmsRoute: AppFarmsRoute,
+  AppHarvestAssignmentsRoute: AppHarvestAssignmentsRoute,
+  AppMachineOperatorsRoute: AppMachineOperatorsRoute,
+  AppMachinesRoute: AppMachinesRoute,
+  AppParksRoute: AppParksRoute,
+  AppPlotsRoute: AppPlotsRoute,
+  AppQrInventoryRoute: AppQrInventoryRoute,
+  AppQrSeriesRoute: AppQrSeriesRoute,
+  AppRolesRoute: AppRolesRoute,
+  AppSatelliteRolesRoute: AppSatelliteRolesRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppTransferOrdersRoute: AppTransferOrdersRoute,
+  AppTransportProvidersRoute: AppTransportProvidersRoute,
+  AppUsersRoute: AppUsersRoute,
+  AppValvesRoute: AppValvesRoute,
+  AppVarietiesRoute: AppVarietiesRoute,
+  AppWorkersRoute: AppWorkersRoute,
+  AppReportsDispatchRoute: AppReportsDispatchRoute,
+  AppReportsForecastRoute: AppReportsForecastRoute,
+  AppReportsHarvestRoute: AppReportsHarvestRoute,
+  AppReportsProductivityRoute: AppReportsProductivityRoute,
+  AppReportsTraceabilityRoute: AppReportsTraceabilityRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
