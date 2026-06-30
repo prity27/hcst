@@ -154,7 +154,7 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
       <SidebarContent className="gap-0">
-        {groups.map((group) => {
+        {visibleGroups.map((group) => {
           const groupActive = group.items.some((i) => isActive(i.url));
           if (group.collapsible && !collapsed) {
             return (
