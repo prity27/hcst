@@ -50,7 +50,9 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, AlertTriangle } from "lucide-react";
+import { getAuthUser } from "@/lib/auth";
+import { isUrlAllowed } from "@/lib/roles";
 
 type Item = { title: string; url: string; icon: React.ComponentType<{ className?: string }> };
 type Group = { label: string; items: Item[]; collapsible?: boolean };
@@ -107,6 +109,7 @@ const groups: Group[] = [
       { title: "Collection Monitoring", url: "/collection-monitoring", icon: Eye },
       { title: "Dispatch Notes", url: "/dispatch-notes", icon: FileText },
       { title: "Transfer Orders", url: "/transfer-orders", icon: ArrowRightLeft },
+      { title: "Error Corrections", url: "/error-corrections", icon: AlertTriangle },
     ],
   },
   {
@@ -134,6 +137,12 @@ export function AppSidebar() {
   const collapsed = state === "collapsed";
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isActive = (url: string) => pathname === url || pathname.startsWith(url + "/");
+  const user = getAuthUser();
+  const role = user?.role ?? "admin";
+  const visibleGroups = groups
+    .map((g) => ({ ...g, items: g.items.filter((i) => isUrlAllowed(role, i.url)) }))
+    .filter((g) => g.items.length > 0);
+
 
   return (
     <Sidebar collapsible="icon" className="border-r border-sidebar-border">
@@ -151,7 +160,7 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
       <SidebarContent className="gap-0">
-        {groups.map((group) => {
+        {visibleGroups.map((group) => {
           const groupActive = group.items.some((i) => isActive(i.url));
           if (group.collapsible && !collapsed) {
             return (

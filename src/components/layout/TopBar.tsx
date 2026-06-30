@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/popover";
 import { sidebarGroups } from "./AppSidebar";
 import { getAuthUser, signOut } from "@/lib/auth";
+import { ROLE_LABELS } from "@/lib/roles";
 
 function useBreadcrumbs() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -141,6 +142,11 @@ export function TopBar() {
               <div>
                 <p className="text-sm font-medium">{user?.name}</p>
                 <p className="text-xs text-muted-foreground font-normal">{user?.email}</p>
+                {user?.role && (
+                  <Badge variant="secondary" className="mt-1.5 text-[10px] font-medium">
+                    {ROLE_LABELS[user.role]}
+                  </Badge>
+                )}
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />

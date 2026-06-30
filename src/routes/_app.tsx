@@ -4,11 +4,18 @@ import { AppSidebar } from "@/components/layout/AppSidebar";
 import { TopBar } from "@/components/layout/TopBar";
 import { Toaster } from "@/components/ui/sonner";
 import { getAuthUser } from "@/lib/auth";
+import { isUrlAllowed, defaultLandingForRole } from "@/lib/roles";
 
 export const Route = createFileRoute("/_app")({
-  beforeLoad: () => {
-    if (typeof window !== "undefined" && !getAuthUser()) {
-      throw redirect({ to: "/login" });
+  beforeLoad: ({ location }) => {
+    if (typeof window === "undefined") return;
+    const user = getAuthUser();
+    if (!user) throw redirect({ to: "/login" });
+    if (location.pathname === "/" || location.pathname === "") {
+      throw redirect({ to: defaultLandingForRole(user.role) });
+    }
+    if (!isUrlAllowed(user.role, location.pathname)) {
+      throw redirect({ to: defaultLandingForRole(user.role) });
     }
   },
   component: AppLayout,
