@@ -7,12 +7,14 @@ export const Route = createFileRoute("/_app/machine-operators")({
   component: () => (
     <MasterDataPage
       title="Machine Operators"
-      description="Certified machinery operators"
+      description="Certified operators — linked to Workers"
       data={machineOperators}
-      addLabel="Add Operator"
+      addLabel="Link Operator"
       columns={[
-        { key: "code", header: "Code", className: "font-mono text-xs" },
-        { key: "name", header: "Operator", render: (r) => <span className="font-medium">{r.name}</span> },
+        { key: "id", header: "ID", className: "font-mono text-xs" },
+        { key: "workerCode", header: "Worker", className: "font-mono text-xs" },
+        { key: "name", header: "Name", render: (r) => <span className="font-medium">{r.name}</span> },
+        { key: "dni", header: "DNI / NIE", className: "font-mono text-xs" },
         { key: "license", header: "License", className: "font-mono text-xs" },
         { key: "machineType", header: "Machine type" },
         { key: "status", header: "Status" },
