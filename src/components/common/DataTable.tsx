@@ -32,7 +32,6 @@ import {
   Search,
   Filter,
   Download,
-  Upload,
   MoreHorizontal,
   ChevronLeft,
   ChevronRight,
@@ -40,7 +39,7 @@ import {
   ArrowUp,
   ArrowDown,
   Pencil,
-  Trash2,
+  PowerOff,
   FileSpreadsheet,
   FileText as FilePdf,
   Inbox,
@@ -134,28 +133,24 @@ export function DataTable<T extends { id: string; status?: string }>({
             <div className="flex items-center gap-2 ml-2">
               <span className="text-xs text-muted-foreground">{selectedCount} selected</span>
               <Button variant="outline" size="sm">Bulk Edit</Button>
-              <Button variant="outline" size="sm" className="text-destructive">Delete</Button>
+              <Button variant="outline" size="sm">Deactivate</Button>
             </div>
           )}
         </div>
         <div className="flex items-center gap-2">
           {importExport && (
-            <>
-              <Button variant="outline" size="sm" className="gap-1.5">
-                <Upload className="h-3.5 w-3.5" /> Import
-              </Button>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm" className="gap-1.5">
-                    <Download className="h-3.5 w-3.5" /> Export
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem><FileSpreadsheet className="mr-2 h-4 w-4" /> Export Excel</DropdownMenuItem>
-                  <DropdownMenuItem><FilePdf className="mr-2 h-4 w-4" /> Export PDF</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="gap-1.5">
+                  <Download className="h-3.5 w-3.5" /> Export
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem><FileSpreadsheet className="mr-2 h-4 w-4" /> Export CSV</DropdownMenuItem>
+                <DropdownMenuItem><FileSpreadsheet className="mr-2 h-4 w-4" /> Export Excel</DropdownMenuItem>
+                <DropdownMenuItem><FilePdf className="mr-2 h-4 w-4" /> Export PDF</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           )}
         </div>
       </div>
@@ -243,7 +238,7 @@ export function DataTable<T extends { id: string; status?: string }>({
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuItem><Pencil className="mr-2 h-4 w-4" /> Edit</DropdownMenuItem>
-                          <DropdownMenuItem className="text-destructive"><Trash2 className="mr-2 h-4 w-4" /> Delete</DropdownMenuItem>
+                          <DropdownMenuItem><PowerOff className="mr-2 h-4 w-4" /> Deactivate</DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>
