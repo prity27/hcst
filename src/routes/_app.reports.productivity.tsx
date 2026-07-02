@@ -4,8 +4,8 @@ import { StatCard } from "@/components/common/StatCard";
 import { DataTable } from "@/components/common/DataTable";
 import { Users, TrendingUp, Award, Activity } from "lucide-react";
 import { workers, productivity } from "@/lib/mock-data";
-import { Progress } from "@/components/ui/progress";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
+import { ClarifyBanner } from "@/components/common/ClarifyBanner";
 
 export const Route = createFileRoute("/_app/reports/productivity")({
   head: () => ({ meta: [{ title: "Worker Productivity — HCTS" }] }),
@@ -16,13 +16,18 @@ export const Route = createFileRoute("/_app/reports/productivity")({
       kpis={
         <>
           <StatCard label="Workers Active" value="384" delta="+12" icon={<Users className="h-4.5 w-4.5" />} accent="info" />
-          <StatCard label="Avg Productivity" value="92%" delta="+1.4%" icon={<TrendingUp className="h-4.5 w-4.5" />} accent="success" />
-          <StatCard label="Top Performer" value="Crew C" icon={<Award className="h-4.5 w-4.5" />} accent="primary" />
-          <StatCard label="Hours Logged" value="6,240" delta="+8.1%" icon={<Activity className="h-4.5 w-4.5" />} accent="earth" />
+          <StatCard label="Avg Crew Output" value="1,540 kg" delta="+3.2%" icon={<TrendingUp className="h-4.5 w-4.5" />} accent="success" />
+          <StatCard label="Top Crew" value="Crew C" icon={<Award className="h-4.5 w-4.5" />} accent="primary" />
+          <StatCard label="Assignments Closed" value="86" delta="+8.1%" icon={<Activity className="h-4.5 w-4.5" />} accent="earth" />
         </>
       }
       chart={
         <>
+          <ClarifyBanner
+            items={[
+              "Per-worker productivity KPI is not in WBS; keeping crew-level output only until PM confirms.",
+            ]}
+          />
           <div>
             <h3 className="text-base font-semibold">Output by Crew</h3>
             <p className="text-xs text-muted-foreground">Total kg harvested</p>
@@ -49,16 +54,6 @@ export const Route = createFileRoute("/_app/reports/productivity")({
             { key: "name", header: "Worker", render: (r) => <span className="font-medium">{r.name}</span> },
             { key: "role", header: "Role" },
             { key: "company", header: "Company", className: "text-muted-foreground" },
-            {
-              key: "productivity",
-              header: "Productivity",
-              render: (r) => (
-                <div className="flex items-center gap-2">
-                  <Progress value={r.productivity} className="h-1.5 w-32" />
-                  <span className="text-xs tabular-nums">{r.productivity}%</span>
-                </div>
-              ),
-            },
             { key: "status", header: "Status" },
           ]}
         />
