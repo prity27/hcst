@@ -37,6 +37,8 @@ export function getAuthUser(): AuthUser | null {
 export function signIn(email: string, _password?: string): AuthUser {
   const users = readUsers();
   const existing = users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+  // Demo: unknown accounts default to admin so PM can exercise every screen.
+  // Production must reject unknown emails; role always comes from the server record.
   const role: Role = existing?.role ?? "admin";
   const user: AuthUser = {
     email,
@@ -47,12 +49,19 @@ export function signIn(email: string, _password?: string): AuthUser {
   return user;
 }
 
-export function signUp(input: { email: string; name: string; password: string; role: Role }): AuthUser {
+/**
+ * Public self-registration.
+ * WBS security fix: sign-up MUST NOT accept a role — only a System Administrator
+ * provisions user roles from the Users page. New accounts land as "read_only"
+ * until an admin promotes them.
+ */
+export function signUp(input: { email: string; name: string; password: string }): AuthUser {
   const users = readUsers();
   const filtered = users.filter((u) => u.email.toLowerCase() !== input.email.toLowerCase());
-  filtered.push({ ...input });
+  const stored: StoredUser = { ...input, role: "read_only" };
+  filtered.push(stored);
   writeUsers(filtered);
-  const user: AuthUser = { email: input.email, name: input.name, role: input.role };
+  const user: AuthUser = { email: input.email, name: input.name, role: "read_only" };
   window.localStorage.setItem(KEY, JSON.stringify(user));
   return user;
 }

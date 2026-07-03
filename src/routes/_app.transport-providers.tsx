@@ -13,9 +13,8 @@ export const Route = createFileRoute("/_app/transport-providers")({
       columns={[
         { key: "code", header: "Code", className: "font-mono text-xs" },
         { key: "name", header: "Provider", render: (r) => <span className="font-medium">{r.name}</span> },
-        { key: "fleet", header: "Fleet size", className: "tabular-nums" },
         { key: "contact", header: "Contact" },
-        { key: "rating", header: "Rating", className: "tabular-nums" },
+        { key: "phone", header: "Phone", className: "tabular-nums" },
         { key: "status", header: "Status" },
       ]}
     />

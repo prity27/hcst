@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Leaf, Mail, Lock, Eye, EyeOff, ArrowRight, User as UserIcon, ShieldCheck } from "lucide-react";
+import { Leaf, Mail, Lock, Eye, EyeOff, ArrowRight, User as UserIcon, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,15 +14,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { signIn, signUp, requestPasswordReset } from "@/lib/auth";
-import { ROLE_LABELS, ROLE_DESCRIPTIONS, defaultLandingForRole, type Role } from "@/lib/roles";
+import { ROLE_LABELS, defaultLandingForRole } from "@/lib/roles";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/login")({
@@ -35,7 +28,6 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
 });
 
-const ROLES: Role[] = ["admin", "ops_director", "field_engineer", "admin_team", "reporting", "read_only"];
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -47,11 +39,10 @@ function LoginPage() {
   const [remember, setRemember] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  // sign up
+  // sign up (no role picker — WBS requires only System Administrator to provision roles)
   const [suName, setSuName] = useState("");
   const [suEmail, setSuEmail] = useState("");
   const [suPassword, setSuPassword] = useState("");
-  const [suRole, setSuRole] = useState<Role>("field_engineer");
   const [suLoading, setSuLoading] = useState(false);
 
   // forgot password
@@ -86,8 +77,8 @@ function LoginPage() {
     }
     setSuLoading(true);
     setTimeout(() => {
-      const user = signUp({ name: suName, email: suEmail, password: suPassword, role: suRole });
-      toast.success(`Account created — signed in as ${ROLE_LABELS[user.role]}`);
+      const user = signUp({ name: suName, email: suEmail, password: suPassword });
+      toast.success(`Account created — pending role assignment (${ROLE_LABELS[user.role]}). Contact a System Administrator to activate access.`);
       navigate({ to: defaultLandingForRole(user.role) });
     }, 500);
   };
@@ -307,24 +298,12 @@ function LoginPage() {
                       </div>
                     </div>
 
-                    <div className="space-y-1.5">
-                      <Label htmlFor="su-role">Role</Label>
-                      <Select value={suRole} onValueChange={(v) => setSuRole(v as Role)}>
-                        <SelectTrigger id="su-role" className="h-11 bg-background/80">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {ROLES.map((r) => (
-                            <SelectItem key={r} value={r}>
-                              <div className="flex items-center gap-2">
-                                <ShieldCheck className="h-3.5 w-3.5 text-primary" />
-                                <span className="font-medium">{ROLE_LABELS[r]}</span>
-                              </div>
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <p className="text-xs text-muted-foreground">{ROLE_DESCRIPTIONS[suRole]}</p>
+                    <div className="flex items-start gap-2 rounded-lg border border-warning/30 bg-warning/5 p-3">
+                      <ShieldAlert className="h-4 w-4 shrink-0 text-warning-foreground mt-0.5" />
+                      <p className="text-xs text-muted-foreground">
+                        New accounts are created with <span className="font-medium text-foreground">Read Only</span> access.
+                        A System Administrator will assign your operational role.
+                      </p>
                     </div>
 
                     <Button type="submit" disabled={suLoading} className="mt-2 h-11 w-full gap-1.5 text-sm font-medium">

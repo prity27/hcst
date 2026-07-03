@@ -40,7 +40,7 @@ import {
   ArrowUp,
   ArrowDown,
   Pencil,
-  Trash2,
+  PowerOff,
   FileSpreadsheet,
   FileText as FilePdf,
   Inbox,
@@ -134,7 +134,7 @@ export function DataTable<T extends { id: string; status?: string }>({
             <div className="flex items-center gap-2 ml-2">
               <span className="text-xs text-muted-foreground">{selectedCount} selected</span>
               <Button variant="outline" size="sm">Bulk Edit</Button>
-              <Button variant="outline" size="sm" className="text-destructive">Delete</Button>
+              <Button variant="outline" size="sm" className="text-destructive">Deactivate</Button>
             </div>
           )}
         </div>
@@ -243,7 +243,7 @@ export function DataTable<T extends { id: string; status?: string }>({
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuItem><Pencil className="mr-2 h-4 w-4" /> Edit</DropdownMenuItem>
-                          <DropdownMenuItem className="text-destructive"><Trash2 className="mr-2 h-4 w-4" /> Delete</DropdownMenuItem>
+                          <DropdownMenuItem className="text-destructive"><PowerOff className="mr-2 h-4 w-4" /> Deactivate</DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>

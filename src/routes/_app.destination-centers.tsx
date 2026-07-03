@@ -14,7 +14,6 @@ export const Route = createFileRoute("/_app/destination-centers")({
         { key: "code", header: "Code", className: "font-mono text-xs" },
         { key: "name", header: "Center", render: (r) => <span className="font-medium">{r.name}</span> },
         { key: "city", header: "City" },
-        { key: "capacity", header: "Capacity", className: "tabular-nums" },
         { key: "status", header: "Status" },
       ]}
     />
