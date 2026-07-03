@@ -298,24 +298,12 @@ function LoginPage() {
                       </div>
                     </div>
 
-                    <div className="space-y-1.5">
-                      <Label htmlFor="su-role">Role</Label>
-                      <Select value={suRole} onValueChange={(v) => setSuRole(v as Role)}>
-                        <SelectTrigger id="su-role" className="h-11 bg-background/80">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {ROLES.map((r) => (
-                            <SelectItem key={r} value={r}>
-                              <div className="flex items-center gap-2">
-                                <ShieldCheck className="h-3.5 w-3.5 text-primary" />
-                                <span className="font-medium">{ROLE_LABELS[r]}</span>
-                              </div>
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <p className="text-xs text-muted-foreground">{ROLE_DESCRIPTIONS[suRole]}</p>
+                    <div className="flex items-start gap-2 rounded-lg border border-warning/30 bg-warning/5 p-3">
+                      <ShieldAlert className="h-4 w-4 shrink-0 text-warning-foreground mt-0.5" />
+                      <p className="text-xs text-muted-foreground">
+                        New accounts are created with <span className="font-medium text-foreground">Read Only</span> access.
+                        A System Administrator will assign your operational role.
+                      </p>
                     </div>
 
                     <Button type="submit" disabled={suLoading} className="mt-2 h-11 w-full gap-1.5 text-sm font-medium">
