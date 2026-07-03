@@ -43,7 +43,6 @@ import { Route as AppReportsProductivityRouteImport } from './routes/_app.report
 import { Route as AppReportsHarvestRouteImport } from './routes/_app.reports.harvest'
 import { Route as AppReportsForecastRouteImport } from './routes/_app.reports.forecast'
 import { Route as AppReportsDispatchRouteImport } from './routes/_app.reports.dispatch'
-import { Route as AppCampaignsIdRouteImport } from './routes/_app.campaigns.$id'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -214,18 +213,13 @@ const AppReportsDispatchRoute = AppReportsDispatchRouteImport.update({
   path: '/reports/dispatch',
   getParentRoute: () => AppRoute,
 } as any)
-const AppCampaignsIdRoute = AppCampaignsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => AppCampaignsRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/audit-logs': typeof AppAuditLogsRoute
   '/buyers': typeof AppBuyersRoute
-  '/campaigns': typeof AppCampaignsRouteWithChildren
+  '/campaigns': typeof AppCampaignsRoute
   '/collection-monitoring': typeof AppCollectionMonitoringRoute
   '/dashboard': typeof AppDashboardRoute
   '/destination-centers': typeof AppDestinationCentersRoute
@@ -249,7 +243,6 @@ export interface FileRoutesByFullPath {
   '/valves': typeof AppValvesRoute
   '/varieties': typeof AppVarietiesRoute
   '/workers': typeof AppWorkersRoute
-  '/campaigns/$id': typeof AppCampaignsIdRoute
   '/reports/dispatch': typeof AppReportsDispatchRoute
   '/reports/forecast': typeof AppReportsForecastRoute
   '/reports/harvest': typeof AppReportsHarvestRoute
@@ -261,7 +254,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/audit-logs': typeof AppAuditLogsRoute
   '/buyers': typeof AppBuyersRoute
-  '/campaigns': typeof AppCampaignsRouteWithChildren
+  '/campaigns': typeof AppCampaignsRoute
   '/collection-monitoring': typeof AppCollectionMonitoringRoute
   '/dashboard': typeof AppDashboardRoute
   '/destination-centers': typeof AppDestinationCentersRoute
@@ -285,7 +278,6 @@ export interface FileRoutesByTo {
   '/valves': typeof AppValvesRoute
   '/varieties': typeof AppVarietiesRoute
   '/workers': typeof AppWorkersRoute
-  '/campaigns/$id': typeof AppCampaignsIdRoute
   '/reports/dispatch': typeof AppReportsDispatchRoute
   '/reports/forecast': typeof AppReportsForecastRoute
   '/reports/harvest': typeof AppReportsHarvestRoute
@@ -299,7 +291,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/_app/audit-logs': typeof AppAuditLogsRoute
   '/_app/buyers': typeof AppBuyersRoute
-  '/_app/campaigns': typeof AppCampaignsRouteWithChildren
+  '/_app/campaigns': typeof AppCampaignsRoute
   '/_app/collection-monitoring': typeof AppCollectionMonitoringRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/destination-centers': typeof AppDestinationCentersRoute
@@ -323,7 +315,6 @@ export interface FileRoutesById {
   '/_app/valves': typeof AppValvesRoute
   '/_app/varieties': typeof AppVarietiesRoute
   '/_app/workers': typeof AppWorkersRoute
-  '/_app/campaigns/$id': typeof AppCampaignsIdRoute
   '/_app/reports/dispatch': typeof AppReportsDispatchRoute
   '/_app/reports/forecast': typeof AppReportsForecastRoute
   '/_app/reports/harvest': typeof AppReportsHarvestRoute
@@ -361,7 +352,6 @@ export interface FileRouteTypes {
     | '/valves'
     | '/varieties'
     | '/workers'
-    | '/campaigns/$id'
     | '/reports/dispatch'
     | '/reports/forecast'
     | '/reports/harvest'
@@ -397,7 +387,6 @@ export interface FileRouteTypes {
     | '/valves'
     | '/varieties'
     | '/workers'
-    | '/campaigns/$id'
     | '/reports/dispatch'
     | '/reports/forecast'
     | '/reports/harvest'
@@ -434,7 +423,6 @@ export interface FileRouteTypes {
     | '/_app/valves'
     | '/_app/varieties'
     | '/_app/workers'
-    | '/_app/campaigns/$id'
     | '/_app/reports/dispatch'
     | '/_app/reports/forecast'
     | '/_app/reports/harvest'
@@ -688,32 +676,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppReportsDispatchRouteImport
       parentRoute: typeof AppRoute
     }
-    '/_app/campaigns/$id': {
-      id: '/_app/campaigns/$id'
-      path: '/$id'
-      fullPath: '/campaigns/$id'
-      preLoaderRoute: typeof AppCampaignsIdRouteImport
-      parentRoute: typeof AppCampaignsRoute
-    }
   }
 }
-
-interface AppCampaignsRouteChildren {
-  AppCampaignsIdRoute: typeof AppCampaignsIdRoute
-}
-
-const AppCampaignsRouteChildren: AppCampaignsRouteChildren = {
-  AppCampaignsIdRoute: AppCampaignsIdRoute,
-}
-
-const AppCampaignsRouteWithChildren = AppCampaignsRoute._addFileChildren(
-  AppCampaignsRouteChildren,
-)
 
 interface AppRouteChildren {
   AppAuditLogsRoute: typeof AppAuditLogsRoute
   AppBuyersRoute: typeof AppBuyersRoute
-  AppCampaignsRoute: typeof AppCampaignsRouteWithChildren
+  AppCampaignsRoute: typeof AppCampaignsRoute
   AppCollectionMonitoringRoute: typeof AppCollectionMonitoringRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppDestinationCentersRoute: typeof AppDestinationCentersRoute
@@ -747,7 +716,7 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppAuditLogsRoute: AppAuditLogsRoute,
   AppBuyersRoute: AppBuyersRoute,
-  AppCampaignsRoute: AppCampaignsRouteWithChildren,
+  AppCampaignsRoute: AppCampaignsRoute,
   AppCollectionMonitoringRoute: AppCollectionMonitoringRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppDestinationCentersRoute: AppDestinationCentersRoute,

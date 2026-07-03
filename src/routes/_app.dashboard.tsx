@@ -105,15 +105,15 @@ function Dashboard() {
         {/* KPI grid */}
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
           <StatCard label="Today's Harvest" value="24,180 kg" delta="+8.4%" icon={<Sprout className="h-4.5 w-4.5" />} accent="primary" />
-          <StatCard label="Active Crews" value="18" delta="+2" icon={<Users className="h-4.5 w-4.5" />} accent="info" />
-          <StatCard label="Satellite Staff" value="42" delta="+3" icon={<Users className="h-4.5 w-4.5" />} accent="earth" />
-          <StatCard label="Satellite / Picker Ratio" value="1 : 8.1" icon={<Activity className="h-4.5 w-4.5" />} accent="info" />
-          <StatCard label="Forecast Progress" value="62%" delta="+4.1%" icon={<TrendingUp className="h-4.5 w-4.5" />} accent="success" />
+          <StatCard label="Total Workers" value="384" delta="+12" icon={<Users className="h-4.5 w-4.5" />} accent="info" />
           <StatCard label="Active Farms" value="14" delta="+2" icon={<MapPin className="h-4.5 w-4.5" />} accent="success" />
-          <StatCard label="QR Crates Generated" value="48,200" delta="+1.2%" icon={<QrCode className="h-4.5 w-4.5" />} accent="earth" />
-          <StatCard label="QR Crates Scanned" value="28,617" delta="+4.8%" icon={<ScanLine className="h-4.5 w-4.5" />} accent="warning" />
+          <StatCard label="QR Generated" value="48,200" delta="+1.2%" icon={<QrCode className="h-4.5 w-4.5" />} accent="earth" />
+          <StatCard label="QR Assigned" value="32,940" delta="+6.1%" icon={<ScanLine className="h-4.5 w-4.5" />} accent="warning" />
+          <StatCard label="QR Collected" value="28,617" delta="+4.8%" icon={<CheckCircle2 className="h-4.5 w-4.5" />} accent="success" />
           <StatCard label="Today's Dispatch" value="18,420 kg" delta="+3.2%" icon={<PackageCheck className="h-4.5 w-4.5" />} accent="primary" />
-          <StatCard label="Trucks Departed" value="22" delta="+5" icon={<Truck className="h-4.5 w-4.5" />} accent="info" />
+          <StatCard label="Trucks Dispatched" value="22" delta="+5" icon={<Truck className="h-4.5 w-4.5" />} accent="info" />
+          <StatCard label="Pending Collection" value="4,323" delta="-2.1%" trend="down" icon={<Clock className="h-4.5 w-4.5" />} accent="warning" />
+          <StatCard label="Productivity Avg" value="92%" delta="+1.4%" icon={<TrendingUp className="h-4.5 w-4.5" />} accent="success" />
         </div>
 
         {/* Charts row */}
