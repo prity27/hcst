@@ -13,7 +13,6 @@ export const Route = createFileRoute("/_app/satellite-roles")({
       columns={[
         { key: "code", header: "Code", className: "font-mono text-xs" },
         { key: "name", header: "Role", render: (r) => <span className="font-medium">{r.name}</span> },
-        { key: "level", header: "Level" },
         { key: "status", header: "Status" },
       ]}
     />

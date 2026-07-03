@@ -12,8 +12,6 @@ export const Route = createFileRoute("/_app/varieties")({
       columns={[
         { key: "code", header: "Code", className: "font-mono text-xs" },
         { key: "name", header: "Variety", render: (r) => <span className="font-medium">{r.name}</span> },
-        { key: "color", header: "Color" },
-        { key: "maturityDays", header: "Maturity (days)", className: "tabular-nums" },
         { key: "status", header: "Status" },
       ]}
     />

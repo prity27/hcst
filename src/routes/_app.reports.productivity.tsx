@@ -4,7 +4,6 @@ import { StatCard } from "@/components/common/StatCard";
 import { DataTable } from "@/components/common/DataTable";
 import { Users, TrendingUp, Award, Activity } from "lucide-react";
 import { workers, productivity } from "@/lib/mock-data";
-import { Progress } from "@/components/ui/progress";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 
 export const Route = createFileRoute("/_app/reports/productivity")({
@@ -12,12 +11,12 @@ export const Route = createFileRoute("/_app/reports/productivity")({
   component: () => (
     <ReportShell
       title="Worker Productivity"
-      description="Crew and worker performance analytics"
+      description="Crew output analytics (aggregated from mobile scans)"
       kpis={
         <>
           <StatCard label="Workers Active" value="384" delta="+12" icon={<Users className="h-4.5 w-4.5" />} accent="info" />
-          <StatCard label="Avg Productivity" value="92%" delta="+1.4%" icon={<TrendingUp className="h-4.5 w-4.5" />} accent="success" />
-          <StatCard label="Top Performer" value="Crew C" icon={<Award className="h-4.5 w-4.5" />} accent="primary" />
+          <StatCard label="Avg Output" value="1,540 kg" delta="+3.8%" icon={<TrendingUp className="h-4.5 w-4.5" />} accent="success" />
+          <StatCard label="Top Crew" value="Crew C" icon={<Award className="h-4.5 w-4.5" />} accent="primary" />
           <StatCard label="Hours Logged" value="6,240" delta="+8.1%" icon={<Activity className="h-4.5 w-4.5" />} accent="earth" />
         </>
       }
@@ -49,16 +48,7 @@ export const Route = createFileRoute("/_app/reports/productivity")({
             { key: "name", header: "Worker", render: (r) => <span className="font-medium">{r.name}</span> },
             { key: "role", header: "Role" },
             { key: "company", header: "Company", className: "text-muted-foreground" },
-            {
-              key: "productivity",
-              header: "Productivity",
-              render: (r) => (
-                <div className="flex items-center gap-2">
-                  <Progress value={r.productivity} className="h-1.5 w-32" />
-                  <span className="text-xs tabular-nums">{r.productivity}%</span>
-                </div>
-              ),
-            },
+            { key: "qrCard", header: "QR Card", className: "font-mono text-xs" },
             { key: "status", header: "Status" },
           ]}
         />
