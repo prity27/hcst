@@ -29,8 +29,6 @@ export const Route = createFileRoute("/login")({
 });
 
 
-const ROLES: Role[] = ["admin", "ops_director", "field_engineer", "admin_team", "reporting", "read_only"];
-
 function LoginPage() {
   const navigate = useNavigate();
 
@@ -41,11 +39,10 @@ function LoginPage() {
   const [remember, setRemember] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  // sign up
+  // sign up (no role picker — WBS requires only System Administrator to provision roles)
   const [suName, setSuName] = useState("");
   const [suEmail, setSuEmail] = useState("");
   const [suPassword, setSuPassword] = useState("");
-  const [suRole, setSuRole] = useState<Role>("field_engineer");
   const [suLoading, setSuLoading] = useState(false);
 
   // forgot password
@@ -80,8 +77,8 @@ function LoginPage() {
     }
     setSuLoading(true);
     setTimeout(() => {
-      const user = signUp({ name: suName, email: suEmail, password: suPassword, role: suRole });
-      toast.success(`Account created — signed in as ${ROLE_LABELS[user.role]}`);
+      const user = signUp({ name: suName, email: suEmail, password: suPassword });
+      toast.success(`Account created — pending role assignment (${ROLE_LABELS[user.role]}). Contact a System Administrator to activate access.`);
       navigate({ to: defaultLandingForRole(user.role) });
     }, 500);
   };
