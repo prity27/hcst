@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Leaf, Mail, Lock, Eye, EyeOff, ArrowRight, User as UserIcon, ShieldCheck } from "lucide-react";
+import { Leaf, Mail, Lock, Eye, EyeOff, ArrowRight, User as UserIcon, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,15 +14,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { signIn, signUp, requestPasswordReset } from "@/lib/auth";
-import { ROLE_LABELS, ROLE_DESCRIPTIONS, defaultLandingForRole, type Role } from "@/lib/roles";
+import { ROLE_LABELS, defaultLandingForRole } from "@/lib/roles";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/login")({
@@ -34,6 +27,7 @@ export const Route = createFileRoute("/login")({
   }),
   component: LoginPage,
 });
+
 
 const ROLES: Role[] = ["admin", "ops_director", "field_engineer", "admin_team", "reporting", "read_only"];
 
