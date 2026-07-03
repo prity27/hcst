@@ -1,57 +1,98 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ReportShell } from "@/components/common/ReportShell";
-import { StatCard } from "@/components/common/StatCard";
-import { DataTable } from "@/components/common/DataTable";
-import { Network, QrCode, ShieldCheck, MapPin } from "lucide-react";
-import { qrInventory } from "@/lib/mock-data";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Search, MapPin, ScanLine, PackageCheck, Truck, ArrowRightCircle } from "lucide-react";
+import { qrInventory, dispatchNotes, transferOrders } from "@/lib/mock-data";
+import { useState } from "react";
 
 export const Route = createFileRoute("/_app/reports/traceability")({
-  head: () => ({ meta: [{ title: "Traceability Reports — HCTS" }] }),
-  component: () => (
+  head: () => ({ meta: [{ title: "Traceability — HCTS" }] }),
+  component: TraceabilityReport,
+});
+
+function TraceabilityReport() {
+  const [code, setCode] = useState("QR-0000001");
+  const qr = qrInventory.find((q) => q.id === code) ?? qrInventory[0];
+  const dn = dispatchNotes[0];
+  const to = transferOrders.find((t) => t.dispatchNote === dn.id) ?? transferOrders[0];
+
+  return (
     <ReportShell
-      title="Traceability Report"
-      description="End-to-end traceability across the supply chain"
+      title="Traceability"
+      description="Follow a QR-tagged crate through the WBS MVP chain"
       kpis={
-        <>
-          <StatCard label="QR Traceable" value="99.7%" delta="+0.2%" icon={<Network className="h-4.5 w-4.5" />} accent="success" />
-          <StatCard label="Codes Tracked" value="28,617" delta="+4.8%" icon={<QrCode className="h-4.5 w-4.5" />} accent="primary" />
-          <StatCard label="Certified Lots" value="142" icon={<ShieldCheck className="h-4.5 w-4.5" />} accent="info" />
-          <StatCard label="Origins Mapped" value="14 farms" icon={<MapPin className="h-4.5 w-4.5" />} accent="earth" />
-        </>
+        <Card className="border-border p-4 shadow-card md:col-span-4">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <div className="relative max-w-md flex-1">
+              <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="Enter QR code (e.g. QR-0000001)"
+                className="h-9 pl-9 font-mono"
+              />
+            </div>
+            <Button size="sm">Trace</Button>
+          </div>
+        </Card>
       }
       chart={
-        <div className="grid gap-4 md:grid-cols-5">
-          {["Plot Origin", "Worker Scan", "Park Storage", "Dispatch Loaded", "Buyer Delivered"].map((step, i) => (
-            <div key={step} className="relative rounded-lg border border-border bg-muted/30 p-4">
-              <div className="text-[10px] uppercase tracking-wide text-muted-foreground">Step {i + 1}</div>
-              <div className="mt-1 text-sm font-semibold">{step}</div>
-              <div className="mt-3 text-2xl font-semibold tabular-nums text-primary">
-                {[28617, 28612, 28590, 28412, 28104][i].toLocaleString()}
-              </div>
-              <div className="mt-1 text-[11px] text-muted-foreground">
-                {(((28617 - [28617, 28612, 28590, 28412, 28104][i]) / 28617) * 100).toFixed(2)}% loss
-              </div>
-            </div>
-          ))}
-        </div>
+        <>
+          <div>
+            <h3 className="text-base font-semibold">MVP Chain</h3>
+            <p className="text-xs text-muted-foreground">
+              Plot Origin → Collection Point Scan → Dispatch Note → Transfer Order → Truck Departure
+            </p>
+          </div>
+          <div className="grid gap-3 md:grid-cols-5">
+            <Step icon={<MapPin />} title="Plot Origin" primary={qr.plot} secondary="Farm origin" />
+            <Step icon={<ScanLine />} title="Collection Scan" primary={qr.id} secondary={qr.scannedAt} />
+            <Step icon={<PackageCheck />} title="Dispatch Note" primary={dn.id} secondary={dn.buyer} />
+            <Step icon={<ArrowRightCircle />} title="Transfer Order" primary={to.id} secondary={to.provider} />
+            <Step icon={<Truck />} title="Truck Departure" primary={to.truck} secondary={`ETA ${to.eta}`} />
+          </div>
+        </>
       }
       table={
-        <DataTable
-          data={qrInventory}
-          bulkActions={false}
-          importExport={false}
-          rowActions={false}
-          columns={[
-            { key: "id", header: "QR Code", className: "font-mono text-xs font-medium" },
-            { key: "series", header: "Series", className: "font-mono text-xs" },
-            { key: "plot", header: "Plot Origin", className: "font-mono text-xs" },
-            { key: "worker", header: "Scanned by" },
-            { key: "weight", header: "Weight", className: "tabular-nums" },
-            { key: "scannedAt", header: "Last Event", className: "text-muted-foreground tabular-nums" },
-            { key: "status", header: "Status" },
-          ]}
-        />
+        <Card className="border-border p-6 shadow-card">
+          <h3 className="text-sm font-semibold mb-3">Scan history for {qr.id}</h3>
+          <ol className="relative space-y-4 border-l border-border pl-4">
+            <TimelineItem when="Plot origin registered" who={qr.worker} where={qr.plot} />
+            <TimelineItem when={`Scanned at collection point (${qr.scannedAt})`} who={qr.worker} where={qr.plot} />
+            <TimelineItem when={`Attached to dispatch note ${dn.id}`} who="Loading Team" where={dn.destination} />
+            <TimelineItem when={`Transfer order ${to.id} issued`} who={to.driver} where={to.provider} />
+            <TimelineItem when={`Truck ${to.truck} departed — ETA ${to.eta}`} who={to.driver} where={to.provider} />
+          </ol>
+        </Card>
       }
     />
-  ),
-});
+  );
+}
+
+function Step({ icon, title, primary, secondary }: { icon: React.ReactNode; title: string; primary: string; secondary: string }) {
+  return (
+    <div className="rounded-lg border border-border bg-muted/20 p-4">
+      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">{icon}</div>
+      <p className="mt-3 text-[11px] uppercase tracking-wide text-muted-foreground">{title}</p>
+      <p className="font-mono text-sm font-medium">{primary}</p>
+      <p className="text-xs text-muted-foreground">{secondary}</p>
+    </div>
+  );
+}
+
+function TimelineItem({ when, who, where }: { when: string; who: string; where: string }) {
+  return (
+    <li className="relative">
+      <span className="absolute -left-[7px] top-1.5 h-3 w-3 rounded-full bg-primary ring-4 ring-card" />
+      <p className="text-sm">{when}</p>
+      <p className="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+        <Badge variant="secondary" className="font-medium">{who}</Badge>
+        <span>·</span>
+        <span>{where}</span>
+      </p>
+    </li>
+  );
+}

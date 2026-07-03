@@ -6,10 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Leaf } from "lucide-react";
 import { toast } from "sonner";
+import { ClarifyNote } from "@/components/common/ClarifyNote";
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({ meta: [{ title: "Settings — HCTS" }] }),
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/_app/settings")({
 function SettingsPage() {
   return (
     <>
-      <PageHeader title="Settings" description="Manage company, preferences and system configuration" />
+      <PageHeader title="Settings" description="Manage company profile, user preferences and system configuration" />
       <div className="p-6">
         <Tabs defaultValue="company" className="space-y-6">
           <TabsList>
@@ -86,9 +86,6 @@ function SettingsPage() {
                   </SelectContent>
                 </Select>
               </div>
-              <ToggleRow label="Email notifications" desc="Receive operational alerts by email." defaultChecked />
-              <ToggleRow label="Daily digest" desc="One-day summary in your inbox each morning." defaultChecked />
-              <ToggleRow label="Weekly campaign report" desc="Comprehensive PDF every Monday." />
               <div className="flex justify-end gap-2 pt-2">
                 <Button variant="outline">Cancel</Button>
                 <Button onClick={() => toast.success("Preferences saved (demo).")}>Save preferences</Button>
@@ -98,22 +95,18 @@ function SettingsPage() {
 
           <TabsContent value="system">
             <Card className="max-w-3xl border-border p-6 shadow-card gap-5">
-              <Field label="Default QR series prefix" defaultValue="HCTS-" />
-              <Field label="QR series block size" type="number" defaultValue="1000" />
-              <div className="space-y-1.5">
-                <Label>Backup frequency</Label>
-                <Select defaultValue="daily">
-                  <SelectTrigger className="max-w-xs"><SelectValue /></SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="hourly">Hourly</SelectItem>
-                    <SelectItem value="daily">Daily</SelectItem>
-                    <SelectItem value="weekly">Weekly</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <ToggleRow label="Two-factor authentication" desc="Enforce 2FA for all administrator accounts." defaultChecked />
-              <ToggleRow label="Audit log retention" desc="Retain audit logs for 7 years." defaultChecked />
-              <ToggleRow label="Maintenance mode" desc="Temporarily disable user access during upgrades." />
+              <p className="text-sm text-muted-foreground">
+                WBS-scoped system configuration. Additional options (QR prefix, backup, maintenance mode,
+                2FA enforcement, audit retention) are pending PM approval.
+              </p>
+              <Field label="Estimated pallet weight (kg)" type="number" defaultValue="480" />
+              <Field label="Offline timeout (minutes)" type="number" defaultValue="30" />
+
+              <ClarifyNote>
+                The following legacy options were removed pending PM confirmation: QR Prefix, Backup frequency,
+                Maintenance mode, Two-factor authentication toggle, Audit log retention window.
+              </ClarifyNote>
+
               <div className="flex justify-end gap-2 pt-2">
                 <Button variant="outline">Cancel</Button>
                 <Button onClick={() => toast.success("System config saved (demo).")}>Save configuration</Button>
@@ -131,18 +124,6 @@ function Field({ label, ...props }: { label: string } & React.ComponentProps<typ
     <div className="space-y-1.5">
       <Label>{label}</Label>
       <Input {...props} />
-    </div>
-  );
-}
-
-function ToggleRow({ label, desc, defaultChecked }: { label: string; desc: string; defaultChecked?: boolean }) {
-  return (
-    <div className="flex items-center justify-between rounded-lg border border-border bg-muted/20 p-4">
-      <div>
-        <p className="text-sm font-medium">{label}</p>
-        <p className="text-xs text-muted-foreground">{desc}</p>
-      </div>
-      <Switch defaultChecked={defaultChecked} />
     </div>
   );
 }
