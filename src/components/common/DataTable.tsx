@@ -40,7 +40,7 @@ import {
   ArrowUp,
   ArrowDown,
   Pencil,
-  Trash2,
+  PowerOff,
   FileSpreadsheet,
   FileText as FilePdf,
   Inbox,
